@@ -1,0 +1,215 @@
+﻿<Page x:Class="Amalgama.View.Pages.TatooRemoval"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Amalgama.View.Pages"
+      mc:Ignorable="d" 
+      Background="#F3F3F3"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TatooRemoval">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="65"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+      Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Border x:Name="ArrowBut"
+                 MouseDown="ArrowBut_MouseDown"
+                 Style="{StaticResource ArrowBackbutton}"
+                 HorizontalAlignment="Left"
+                 Margin="15 15 0 0">
+                    <Image Source="/Images/ArrowBackButton.png" 
+                    Stretch="Uniform"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="0" Grid.RowSpan="4">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                        <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Column="4" Grid.RowSpan="4">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                        <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Image x:Name="Closer"
+                   MouseDown="Closer_MouseDown"
+                   Source="/Images/Closed.png"
+                   Height="15"
+                   Width="15"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Image Source="/Images/RemoveTatoo.png"
+           HorizontalAlignment="Left"
+           VerticalAlignment="Center"
+           x:Name="ImgAnimated"
+           Height="450">
+                <Image.RenderTransform>
+                    <TranslateTransform Y="0" X="0"/>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Background="Transparent" Grid.Row="0">
+                <Grid>
+                    <Image Source="/Images/TATOO REMOVAL.png" 
+                           Height="15"
+                           Width="175"
+                           Stretch="Fill"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Margin="25 10 0 0"/>
+                    <TextBlock x:Name="TxtWrite"
+                              Style="{StaticResource OtherTxt}"
+                              TextWrapping="Wrap"
+                              FontSize="15"
+                              VerticalAlignment="Top"
+                              MaxHeight="120" 
+                              Margin="0 10 0 0"/>
+                </Grid>
+            </Border>
+            <Grid  Grid.Row="2" Grid.Column="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="105"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0">
+                        <Border Style="{StaticResource MarkerCustom}" 
+                                Grid.Row="1" 
+                                Grid.Column="0"
+                                VerticalAlignment="Top"
+                                Margin="0 10"/>
+
+                    </Grid>
+                    <StackPanel Grid.Column="1" Grid.Row="0">
+                        <TextBlock x:Name="TxtWrite1"
+                                      Style="{StaticResource OtherTxt}"
+                                      TextWrapping="Wrap"
+                                      FontSize="15"
+                                      VerticalAlignment="Top"
+                                      MaxHeight="250" 
+                                      Margin="10 -50"/>
+                    </StackPanel>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Border Style="{StaticResource MarkerCustom}" 
+                                Grid.Row="1" 
+                                Grid.Column="0"
+                                x:Name="Marker1"
+                                 VerticalAlignment="Top"
+                                Margin="0 10"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <TextBlock x:Name="TxtWrite2"
+                                      Style="{StaticResource OtherTxt}"
+                                      TextWrapping="Wrap"
+                                      FontSize="15"
+                                      VerticalAlignment="Top"
+                                      MaxHeight="265" 
+                                      Margin="10 0"/>
+                    </StackPanel>
+                    <Grid Grid.Row="2" Grid.Column="0">
+                        <Border Style="{StaticResource MarkerCustom}" 
+                                Grid.Row="2" 
+                                Grid.Column="0"
+                                x:Name="Marker2"
+                                 VerticalAlignment="Top"
+                                Margin="0 10"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Grid.Row="2">
+                        <TextBlock x:Name="TxtWrite3"
+                                  Style="{StaticResource OtherTxt}"
+                                  TextWrapping="Wrap"
+                                  FontSize="15"
+                                  VerticalAlignment="Top"
+                                  MaxHeight="200" 
+                                  Margin="10 0"/>
+                    </StackPanel>
+                    <Grid Grid.Row="3" Grid.Column="0">
+                        <Border Style="{StaticResource MarkerCustom}" 
+                                Grid.Row="3" 
+                                Grid.Column="0"
+                                x:Name="Marker3"
+                                 VerticalAlignment="Top"
+                                Margin="0 10"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Grid.Row="3">
+                        <TextBlock x:Name="TxtWrite4"
+                                  Style="{StaticResource OtherTxt}"
+                                  TextWrapping="Wrap"
+                                  FontSize="15"
+                                  VerticalAlignment="Top"
+                                  MaxHeight="80" 
+                                  Margin="10 0"/>
+                    </StackPanel>
+                    <Grid Grid.Row="4" Grid.Column="0">
+                        <Border Style="{StaticResource MarkerCustom}" 
+                                Grid.Row="4" 
+                                Grid.Column="0"
+                                 VerticalAlignment="Top"
+                                x:Name="Marker4"
+                                Margin="0 10"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Grid.Row="4">
+                        <TextBlock x:Name="TxtWrite5"
+                              Style="{StaticResource OtherTxt}"
+                              TextWrapping="Wrap"
+                              FontSize="15"
+                              VerticalAlignment="Top"
+                              MaxHeight="255" 
+                              Margin="10 0"/>
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="5" Grid.ColumnSpan="4" 
+              x:Name="AnimatedGrid" Opacity="0">
+            <Grid.RenderTransform>
+                <TranslateTransform Y="50"/>
+            </Grid.RenderTransform>
+            <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button x:Name="RCButtons"
+                         Click="RCButtons_Click"
+                         Style="{StaticResource ButtonSt1}"
+                         Content="Записаться">
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

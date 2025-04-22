@@ -1,0 +1,496 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\bruno.ttf" />
+    <None Remove="Fonts\BrunoAce-Regular.ttf" />
+    <None Remove="Fonts\Jura.ttf" />
+    <None Remove="Images\AMALGAMA.png" />
+    <None Remove="Images\Angelina.png" />
+    <None Remove="Images\Arisha.png" />
+    <None Remove="Images\ArrowBackButton.png" />
+    <None Remove="Images\Bacground.png" />
+    <None Remove="Images\BackBanner.png" />
+    <None Remove="Images\BackSign.png" />
+    <None Remove="Images\bannerbackground.png" />
+    <None Remove="Images\BannerRegisterPage.png" />
+    <None Remove="Images\bannersign.png" />
+    <None Remove="Images\black.png" />
+    <None Remove="Images\black1.png" />
+    <None Remove="Images\Closed.png" />
+    <None Remove="Images\dialogWin.png" />
+    <None Remove="Images\dropMenuIcon.png" />
+    <None Remove="Images\EEPirs\1.png" />
+    <None Remove="Images\EEPirs\2.png" />
+    <None Remove="Images\EEPirs\3.png" />
+    <None Remove="Images\EEPirs\4.png" />
+    <None Remove="Images\EEPirs\5.png" />
+    <None Remove="Images\EEPirs\6.png" />
+    <None Remove="Images\EEPirs\7.png" />
+    <None Remove="Images\GalleryImagesPirsing\Bridge.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\Noostrill.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\Nose.png" />
+    <None Remove="Images\GalleryImagesPirsing\NoseLahg.png" />
+    <None Remove="Images\GalleryImagesPirsing\NosePirc.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\OstinBar.png" />
+    <None Remove="Images\GalleryImagesPirsing\Septrill.png" />
+    <None Remove="Images\GalleryImagesPirsing\SeptumPirc.jpg" />
+    <None Remove="Images\infobanner.jpg" />
+    <None Remove="Images\LeftImage.jpg" />
+    <None Remove="Images\LipsPirs\1.png" />
+    <None Remove="Images\LipsPirs\2.png" />
+    <None Remove="Images\LipsPirs\3.png" />
+    <None Remove="Images\LipsPirs\4.png" />
+    <None Remove="Images\LipsPirs\5.png" />
+    <None Remove="Images\LipsPirs\6.png" />
+    <None Remove="Images\LipsPirs\7.png" />
+    <None Remove="Images\LipsPirs\8.png" />
+    <None Remove="Images\LipsPirs\9.png" />
+    <None Remove="Images\MAngelina.png" />
+    <None Remove="Images\Maria.png" />
+    <None Remove="Images\MArisha.png" />
+    <None Remove="Images\mastersBackground.jpg" />
+    <None Remove="Images\MastersPersonalDate\Icons\left.png" />
+    <None Remove="Images\MastersPersonalDate\Icons\rihgt.png" />
+    <None Remove="Images\MastersPersonalDate\MasterAngelina.png" />
+    <None Remove="Images\MastersPersonalDate\MasterArisha.png" />
+    <None Remove="Images\MastersPersonalDate\MasterBackground.png" />
+    <None Remove="Images\MastersPersonalDate\MasterMaria.jpg" />
+    <None Remove="Images\MastersPersonalDate\Overlay.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\1.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\10.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\12.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\13.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\14.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\15.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\16.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\17.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\18.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\19.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\2.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\20.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\21.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\22.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\23.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\25.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\26.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\3.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\4.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\5.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\6.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\7.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\8.png" />
+    <None Remove="Images\MastersPersonalDate\PirsWorks\9.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\1.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\10.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\11.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\12.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\2.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\3.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\4.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\5.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\6.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\7.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\8.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\9.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\1.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\10.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\12.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\13.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\2.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\3.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\4.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\5.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\6.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\7.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\8.png" />
+    <None Remove="Images\MastersPersonalDate\TatooWorks\9.png" />
+    <None Remove="Images\mBanner.png" />
+    <None Remove="Images\MMaria.png" />
+    <None Remove="Images\PircBack.png" />
+    <None Remove="Images\PIRSING.png" />
+    <None Remove="Images\PIRSING1.png" />
+    <None Remove="Images\recBannerBack.png" />
+    <None Remove="Images\RemoveTatoo.png" />
+    <None Remove="Images\RightImage.png" />
+    <None Remove="Images\Slice1.png" />
+    <None Remove="Images\TATOO.png" />
+    <None Remove="Images\tattooremoval.png" />
+    <None Remove="Images\TBold.png" />
+    <None Remove="Images\y.png" />
+    <None Remove="Styles\TATOO REMOVAL.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Angelina.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Arisha.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ArrowBackButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Bacground.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BackBanner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+    <PackageReference Include="SharpVectors" Version="1.8.4.2" />
+    <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\bruno.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\BrunoAce-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Jura.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AMALGAMA.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BackSign.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\bannerbackground.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BannerRegisterPage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\bannersign.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\black1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Closed.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dialogWin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dropMenuIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\EEPirs\1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\EEPirs\2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\EEPirs\3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\EEPirs\4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\EEPirs\5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\EEPirs\6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\EEPirs\7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\Bridge.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\Noostrill.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\Nose.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\NoseLahg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\NosePirc.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\OstinBar.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\Septrill.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\SeptumPirc.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\infobanner.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LeftImage.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LipsPirs\9.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MAngelina.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Maria.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MArisha.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mastersBackground.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\Icons\left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\Icons\rihgt.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\MasterAngelina.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\MasterArisha.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\MasterBackground.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\MasterMaria.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\Overlay.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\12.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\13.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\14.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\15.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\17.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\18.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\19.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\20.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\21.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\22.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\23.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\25.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\26.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\PirsWorks\9.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\11.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\12.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\9.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\12.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\13.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\TatooWorks\9.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mBanner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MMaria.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PircBack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PIRSING.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PIRSING1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\recBannerBack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\RemoveTatoo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\RightImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Slice1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TATOO.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\tattooremoval.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TBold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\y.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TATOO REMOVAL.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

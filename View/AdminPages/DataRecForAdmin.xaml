@@ -1,0 +1,235 @@
+﻿<Page x:Class="Amalgama.View.AdminPages.DataRecForAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Amalgama.View.AdminPages" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      Background="#F3F3F3"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DataRecForAdmin">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Images/Bacground.png"
+                   Grid.ColumnSpan="5"
+                   Stretch="Fill"/>
+            <Grid x:Name="OverlayGrid"
+                  Background="#80000000"
+                  Visibility="Collapsed"
+                  Panel.ZIndex="-3" 
+                  Grid.ColumnSpan="4"
+                  Grid.RowSpan="3">
+                <Rectangle x:Name="MatteOverlay"
+                      Fill="#A0FFFFFF"
+                      Visibility="Collapsed"
+                      Panel.ZIndex="-2" />
+                <Rectangle x:Name="BlurOverlay"
+                           Visibility="Collapsed" 
+                   Panel.ZIndex="-1">
+                    <Rectangle.Effect>
+                        <BlurEffect x:Name="BackgroundBlur" Radius="25" />
+                    </Rectangle.Effect>
+                </Rectangle>
+            </Grid>
+            <Border Grid.Column="0">
+                <Border.Effect>
+                    <BlurEffect Radius="-2"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                        <GradientStop Color="#404040" Offset="0.0"/>
+                        <GradientStop Color="#707070" Offset="0.02"/>
+                        <GradientStop Color="#A0A0A0" Offset="0.05"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border Grid.Column="4">
+                <Border.Effect>
+                    <BlurEffect Radius="-2"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#404040" Offset="0.0"/>
+                        <GradientStop Color="#707070" Offset="0.02"/>
+                        <GradientStop Color="#A0A0A0" Offset="0.05"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Grid Grid.Column="4">
+                <Image x:Name="CloseButton"
+                       MouseDown="CloseButton_MouseDown"
+                       Source="/Images/Closed.png"
+                       Height="15"
+                       Width="15"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="1"
+                  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="45"/>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Padding="16" 
+                                  Mode="Inverted" 
+                                  Grid.Row="1"
+                                   Panel.ZIndex="5">
+                    <DockPanel>
+                        <ToggleButton x:Name="ToggleButton"
+                          Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
+                          Click="ToggleButton_Click"
+                          HorizontalAlignment="Left"
+                          Grid.Row="0"
+                         />
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <materialDesign:DrawerHost x:Name="DrawerHost" 
+                               Grid.Row="1" 
+                               Grid.RowSpan="4"
+                               HorizontalAlignment="Left">
+                    <materialDesign:DrawerHost.RightDrawerContent>
+                        <Grid Background="White" Width="450"
+                              Panel.ZIndex="1">
+                            <StackPanel VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        Orientation="Vertical">
+                                <Button Content="Галерея" 
+                                        x:Name="Gallery" 
+                                        Click="Gallery_Click" 
+                                        Margin="16" 
+                                        FontSize="25"
+                                        Style="{StaticResource ButtonSt1}"
+                                        Width="250"
+                                        Height="50"/>
+                                <Button Content="Мастера" 
+                                        Margin="16" 
+                                        x:Name="Masters" 
+                                        FontSize="25"
+                                        Click="Masters_Click" 
+                                        Width="250"
+                                        Height="50"
+                                        Style="{StaticResource LightButton}"/>
+                                <Button Content="Частые вопросы" 
+                                        Margin="16" 
+                                        x:Name="QW" 
+                                        Width="250"
+                                        Height="50"
+                                        FontSize="25"
+                                        Click="QW_Click" 
+                                        Style="{StaticResource LightButton}"/>
+                            </StackPanel>
+                            <Button x:Name="SignOut"
+                                      VerticalAlignment="Bottom"
+                                      Style="{StaticResource LightButton}"
+                                      HorizontalAlignment="Center"
+                                      Click="SignOut_Click"
+                                      Content="Выйти"/>
+                        </Grid>
+                    </materialDesign:DrawerHost.RightDrawerContent>
+                </materialDesign:DrawerHost>
+            </Grid>
+            <!--Данные о записях-->
+            <DataGrid x:Name="RecordsDataGrid" 
+                      AutoGenerateColumns="False" 
+                      HeadersVisibility="Column" 
+                      CanUserAddRows="False"
+                      Panel.ZIndex="-5"
+                      Grid.Column="1"
+                      Margin="0 85 0 0"
+                      Grid.ColumnSpan="3"
+                      RowHeight="50"  
+                      BorderBrush="#A1A1A1"
+                      BorderThickness="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">  
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Мастер" 
+                            Binding="{Binding Master}" 
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Дата" 
+                            Binding="{Binding Date}"
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="ФИО Клиента" 
+                            Binding="{Binding FullName}" 
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Номер телефона" 
+                            Binding="{Binding PhoneNumber}" 
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Цвет" 
+                            Binding="{Binding Color}" 
+                            Width="*"
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Желаемый результат"
+                            Binding="{Binding Description}"
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                </DataGrid.Columns>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        <!-- Включение переноса текста -->
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <!-- Центрирование текста по вертикали -->
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <!-- Центрирование текста по горизонтали -->
+                        <Setter Property="BorderBrush" Value="#A1A1A1"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <!-- Установка границ ячеек -->
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderBrush" Value="#A1A1A1"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <!-- Нижняя граница для строк -->
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontFamily" Value="pack://application:,,,/Amalgama;component/Fonts/#Jura"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="#A1A1A1"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <!-- Граница для заголовка -->
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="25"/>
+                        <!-- Убираем серую заливку -->
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridColumnHeader">
+                                    <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                        <TextBlock Text="{Binding}" 
+                                       TextWrapping="Wrap" 
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+        </Grid>
+    </ScrollViewer>
+</Page>

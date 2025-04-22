@@ -1,0 +1,63 @@
+﻿<Window x:Class="Amalgama.View.PhotoViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amalgama.View"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent" 
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Title="PhotoViewWindow" Height="750" Width="1000">
+    <Grid>
+        <Image Source="/Images/MastersPersonalDate/Overlay.png" 
+               Stretch="Fill"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/Images/MastersPersonalDate/Icons/left.png" 
+                   Width="50" Height="50" 
+                   MouseLeftButtonDown="PreviousButton_Click" 
+                   Cursor="Hand" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Margin="10"/>
+
+            <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image x:Name="DisplayedImage"
+                       MaxHeight="500" 
+                       MaxWidth="500" 
+                       MouseLeftButtonDown="DisplayedImage_MouseLeftButtonDown" />
+            </Border>
+
+            <!-- Стрелка "Вперед" справа -->
+            <Image Source="/Images/MastersPersonalDate/Icons/rihgt.png" 
+                   Width="50" Height="50" 
+                   MouseLeftButtonDown="NextButton_Click" 
+                   Cursor="Hand" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Right" 
+                   Margin="10"
+                   Grid.Column="3"/>
+
+            <!-- Кнопка закрытия -->
+            <Border Grid.Column="2" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    Margin="10" 
+                    x:Name="Close"
+                    MouseDown="Close_MouseDown"
+                    Background="Transparent">
+                <Image Source="/Images/Closed.png" 
+                       Height="15"
+                       Width="15"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

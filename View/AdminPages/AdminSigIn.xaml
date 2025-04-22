@@ -1,0 +1,108 @@
+﻿<Window x:Class="Amalgama.View.AdminPages.AdminSigIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amalgama.View.AdminPages" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Height="450" Width="800"
+         AllowsTransparency="True"
+        WindowState="Maximized"
+         Background="#30FFFFFF"
+        Style="{StaticResource MaterialDesignWindow}">
+    <Grid>
+        <Border x:Name="Overlay"
+                Background="#45000000"  
+            Visibility="Visible"
+            HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <Border.Effect>
+                <BlurEffect Radius="185"></BlurEffect>
+            </Border.Effect>
+        </Border>
+        <Border Height="550"
+                Width="650">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Source="/Images/bannersign.png"
+                       Panel.ZIndex="-5"
+                       Height="650"
+                       Width="550"
+                       Stretch="UniformToFill"
+                       Grid.RowSpan="2"/>
+                <Button x:Name="CloseDialog"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Background="Transparent"
+                     Click="CloseDialog_Click">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="Close" 
+                                              Foreground="White" 
+                                              VerticalAlignment="Center" 
+                                              HorizontalAlignment="Center"
+                                              Margin="0 5 0 0"/>
+                    </Button.Content>
+                </Button>
+                <Canvas>
+                    <Grid Grid.Row="1"
+                          Canvas.Top="105"
+                          Canvas.Left="95">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="/Images/AMALGAMA.png"
+                               Height="50"
+                               VerticalAlignment="Center"
+                               Grid.Row="0"
+                               HorizontalAlignment="Center"/>
+                    </Grid>
+                </Canvas>
+                <StackPanel Orientation="Vertical" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            Grid.Row="1">
+                    <TextBlock Text="Имя" 
+                               Style="{StaticResource TextLogin}"/>
+                    <Border Style="{StaticResource BorderStyleBackground}"
+                            Margin="0 15 0 0" >
+                        <TextBox x:Name="Login"
+                                 VerticalContentAlignment="Center"
+                                 Style="{StaticResource CustomTextField}"/>
+                    </Border>
+                    <TextBlock Text="Пароль"
+                               Margin="0 8 0 0"
+                               Style="{StaticResource TextLogin}"/>
+                    <Border Style="{StaticResource BorderStyleBackground}" 
+                            Margin="0 15 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="Password"
+                                     Style="{StaticResource CustomTextField}"
+                                     HorizontalContentAlignment="Left"
+                                     VerticalContentAlignment="Center"
+                                     TextChanged="Password_TextChanged"/>
+                        </StackPanel>
+                    </Border>
+                    <Canvas>
+                        <Border Style="{StaticResource SignBorder}"
+                                    HorizontalAlignment="Center"
+                                    Canvas.Top="35"
+                                x:Name="SignUp"
+                                MouseDown="SignUp_MouseDown">
+                            <TextBlock Text="Войти"
+                                       Style="{StaticResource SignButtonStyle}"/>
+                        </Border>
+                    </Canvas>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+   
+</Window>

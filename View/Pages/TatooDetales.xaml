@@ -1,0 +1,238 @@
+﻿<Page x:Class="Amalgama.View.Pages.TatooDetales"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Amalgama.View.Pages"
+      mc:Ignorable="d"
+     Background="#F3F3F3"
+      Loaded="Page_Loaded"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TatooDetales">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="125"/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.RowSpan="4">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                        <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Row="0"
+              Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Border x:Name="ArrowButt"
+                         MouseDown="ArrowButt_MouseDown"
+                         Style="{StaticResource ArrowBackbutton}"
+                         HorizontalAlignment="Left"
+                         Margin="15 15 0 0">
+                    <Image Source="/Images/ArrowBackButton.png" 
+                            Stretch="Uniform"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1"
+              Grid.Row="1">
+            <Image Source="/Images/Slice1.png" 
+                   Stretch="Fill"
+                   Height="500"
+                   Width="500"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   x:Name="ImgAn" Margin="0,105,0,-265">
+                <Image.RenderTransform>
+                    <TranslateTransform Y="0" X="-50"/>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Border>
+                    <StackPanel Orientation="Vertical" 
+                                VerticalAlignment="Stretch">
+                        <Image Source="/Images/TBold.png" 
+                               Height="25"
+                               HorizontalAlignment="Left"
+                               x:Name="ImgAn1"> 
+                            <Image.RenderTransform>
+                                <TranslateTransform Y="0" X="-200"/>
+                            </Image.RenderTransform>
+                        </Image>
+                        <Border Height="15"></Border>
+                        <TextBlock Style="{StaticResource OtherTxt}"
+                                   x:Name="WriteTxt"
+                                   TextWrapping="Wrap"
+                                   MaxHeight="250"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Border>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                        <TextBlock Style="{StaticResource OtherTxt}"
+                                   x:Name="WriteTxt1"
+                                   TextWrapping="Wrap"
+                                   MaxHeight="250"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="0 5 0 0"/>
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Border>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                        <TextBlock Style="{StaticResource OtherTxt}"
+                           x:Name="WriteTxt2"
+                           TextWrapping="Wrap"
+                           MaxHeight="250"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="0 5 0 0"/>
+                  
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1"
+              x:Name="StackGrid" 
+              Grid.Row="2" 
+              HorizontalAlignment="Center"
+              Grid.ColumnSpan="3"
+              Opacity="0">
+            <Grid.RenderTransform>
+                <TranslateTransform Y="100"/>
+            </Grid.RenderTransform>
+            <Grid.Resources>
+                <Storyboard x:Key="GridSlideUpAnimation">
+                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                             From="100" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.5" />
+                </Storyboard>
+            </Grid.Resources>
+            <StackPanel HorizontalAlignment="Stretch"
+                        Orientation="Horizontal" 
+                        Margin="0">
+                <Border x:Name="PriceWork"
+                        MouseDown="PriceWork_MouseDown"
+                        Height="95"
+                        Width="150"
+                        BorderBrush="Gray"
+                        BorderThickness="0.35"
+                        Margin="0 0 10 0">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="3 часа работы"
+                           Style="{StaticResource Content}" 
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0 15 0 0"/>
+                        <TextBlock Text="3000 руб."
+                           Style="{StaticResource YslugiTitle}" 
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="PricA"
+                        MouseDown="PriceA_MouseDown"
+                        Height="95"
+                        Width="150"
+                        BorderBrush="Gray"
+                        BorderThickness="0.35"
+                        Margin="0 0 10 0">
+                <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Анастезия"
+                           Style="{StaticResource Content}" 
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0 15 0 0"/>
+                        <TextBlock Text="от 500 руб."
+                           Style="{StaticResource YslugiTitle}" 
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="PricE"
+                        MouseDown="PriceE_MouseDown"
+                        Height="95"
+                        Width="150"
+                        BorderBrush="Gray"
+                        BorderThickness="0.35"
+                        Margin="0">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Разработка эскиза татуировки"
+                           Style="{StaticResource Content}" 
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0 10 0 0"/>
+                        <TextBlock Text="Бесплатно"
+                           Style="{StaticResource YslugiTitle}" 
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="3" Grid.RowSpan="4">
+            <Image x:Name="Closes"
+                    MouseDown="Closes_MouseDown"
+                    Source="/Images/Closed.png"
+                    Height="15"
+                    Width="15"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"/>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                        <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Row="5" Grid.ColumnSpan="4"
+              x:Name="AnimatedGrid"
+             Opacity="0">
+            <Grid.RenderTransform>
+                <TranslateTransform Y="50"/>
+            </Grid.RenderTransform>
+
+            <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button x:Name="RCButton"
+                Click="RCButton_Click"
+                Style="{StaticResource ButtonSt1}"
+                Content="Записаться">
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

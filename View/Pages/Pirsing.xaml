@@ -1,0 +1,187 @@
+﻿<Page x:Class="Amalgama.View.Pages.Pirsing"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Amalgama.View.Pages"
+      mc:Ignorable="d" 
+      Background="#F3F3F3"
+      Loaded="Page_Loaded"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Pirsing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="65"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Border x:Name="ArrowBut"
+                         MouseDown="ArrowBut_MouseDown"
+                         Style="{StaticResource ArrowBackbutton}"
+                         HorizontalAlignment="Left"
+                         Margin="15 15 0 0">
+                    <Image Source="/Images/ArrowBackButton.png" 
+                    Stretch="Uniform"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="0" Grid.RowSpan="4">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                        <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Column="4" Grid.RowSpan="4">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                        <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Image x:Name="Closer"
+                   MouseDown="Closer_MouseDown"
+                   Source="/Images/Closed.png"
+                   Height="15"
+                   Width="15"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Image x:Name="AnimatedImage"
+                   Source="/Images/PircBack.png" 
+                   Stretch="Uniform"
+                   Height="450"
+                   HorizontalAlignment="Left"
+                   Opacity="0">
+                <Image.RenderTransform>
+                    <TranslateTransform X="-200"/>
+                </Image.RenderTransform>
+                <Image.Effect>
+                    <DropShadowEffect BlurRadius="10" 
+                          Color="Gray" 
+                          Direction="315" 
+                          ShadowDepth="5" 
+                          Opacity="0.25"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="135"/>
+                <RowDefinition Height="275"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Image Source="/Images/PIRSING1.png"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       x:Name="ImgAn1"
+                       Height="50"
+                       Width="150"/>
+                <Border Background="Transparent" Padding="10">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock x:Name="TxtWrite"
+                           Style="{StaticResource OtherTxt}"
+                           TextWrapping="Wrap"
+                           FontSize="20"
+                           VerticalAlignment="Top"
+                           MaxHeight="120" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Средний блок -->
+            <Grid Grid.Row="1">
+                <Border Background="Transparent" Padding="10">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                        <!-- Основной текст -->
+                        <TextBlock x:Name="TxtWrite1"
+                           Style="{StaticResource OtherTxt}"
+                           TextWrapping="Wrap"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Margin="0,10"
+                           MaxHeight="120" />
+
+                        <!-- Кнопки -->
+                        <StackPanel x:Name="StackAnButton"
+                            Orientation="Vertical"
+                            VerticalAlignment="Top"
+                            Margin="0,10">
+                        <Button x:Name="Pirc_Nose"
+                            Click="Pirc_Nose_Click"
+                            Content="Пирсинг носа"
+                            Style="{StaticResource ButtonSt1}"
+                            Width="450"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            Margin="0,10" />
+                        <Button x:Name="Pirc_Lips"
+                            Click="Pirc_Lips_Click"
+                            Content="Пирсинг губ"
+                            Style="{StaticResource LightButton2}"
+                            Width="450"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            Margin="0,10" />
+                        <Button x:Name="EarsEyeBrow_Lips"
+                            Click="EarsEyeBrow_Lips_Click"
+                            Content="Пирсинг уха и бровей"
+                            Style="{StaticResource LightButton2}"
+                            Width="450"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            Margin="0,10" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Нижний блок -->
+            <Grid Grid.Row="2">
+                <Border Background="Transparent" Padding="10">
+                    <TextBlock x:Name="TxtWriteTitle"
+                               Style="{StaticResource OtherTxt}"
+                               TextWrapping="Wrap"
+                               FontSize="20"
+                               VerticalAlignment="Top"
+                               MaxHeight="320" />
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- Анимированный блок -->
+        <Grid Grid.Row="5" Grid.ColumnSpan="4" x:Name="AnimatedGrid" Opacity="0">
+            <Grid.RenderTransform>
+                <TranslateTransform Y="50"/>
+            </Grid.RenderTransform>
+
+            <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button x:Name="RCButtons"
+                Click="RCButtons_Click"
+                Style="{StaticResource ButtonSt1}"
+                Content="Записаться">
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

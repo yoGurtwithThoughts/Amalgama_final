@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="MarkerCustom" TargetType="Border">
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Height" Value="5"/>
+        <Setter Property="Width" Value="5"/>
+        <Setter Property="CornerRadius" Value="2"/>
+    </Style>
+    
+</ResourceDictionary>

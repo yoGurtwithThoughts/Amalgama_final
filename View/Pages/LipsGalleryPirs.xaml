@@ -1,0 +1,244 @@
+﻿<Page x:Class="Amalgama.View.Pages.LipsGalleryPirs"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Amalgama.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LipsGalleryPirs">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#AFAEAE" Offset="0.0"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.25"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.5"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.75"/>
+                        <GradientStop Color="#F2F2F2" Offset="1.0"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Column="3">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Image x:Name="Close"
+                MouseDown="Close_MouseDown"
+                Source="/Images/Closed.png"
+                Height="15"
+                Width="15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"/>
+            </Grid>
+            <Border Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Canvas Grid.Row="0"
+                        Grid.Column="1">
+                        <StackPanel Orientation="Horizontal"
+                                Panel.ZIndex="2"
+                                Grid.Column="1"
+                                Grid.Row="0" 
+                                HorizontalAlignment="Left" 
+                                VerticalAlignment="Center" 
+                                Width="365">
+                            <Border x:Name="ArrowBut"
+                                Grid.Column="2"
+                                MouseDown="ArrowBut_MouseDown"
+                                Style="{StaticResource ArrowBackbutton}"
+                                Margin="15 15 0 0" Width="187">
+                                <Image Source="/Images/ArrowBackButton.png" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"/>
+                            </Border>
+                        </StackPanel>
+                    </Canvas>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0"
+                                Orientation="Vertical">
+                            <TextBlock Text="Лабрет"
+                           Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/1.png" 
+                      Style="{StaticResource PfotoContainer}"
+                               Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="классический вид пирсинга, 
+                                       когда прокол делается в 
+                                       центре под нижней губой."
+                           Style="{StaticResource Topic}"
+                           Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1"
+                                Orientation="Vertical">
+                            <TextBlock Text="Вертикальный лабрет"
+                                   Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/2.png" 
+                               Style="{StaticResource PfotoContainer}"
+                               Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="пирсинг, 
+                                       при котором губа 
+                                       прокалывается насквозь, 
+                                       и один конец украшения выходит 
+                                       из центра,
+                                       а другой — с нижней стороны."
+                                     Style="{StaticResource Topic}"
+                                     Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="2"
+                                Orientation="Vertical">
+                            <TextBlock Text="Горизонтальный лабрет"
+                                   Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/3.png" 
+                                Style="{StaticResource PfotoContainer}"
+                                Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="прокол выполняется по 
+                                       горизонтали нижней губы, 
+                                       и оба конца украшения расположены
+                                       по центру."
+                                   Style="{StaticResource Topic}"
+                                   Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="0"
+         Orientation="Vertical">
+                            <TextBlock Text="Монро"
+            Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/4.png" 
+         Style="{StaticResource PfotoContainer}"
+         Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="прокол боковой области верхней губы.."
+                                   Style="{StaticResource Topic}"
+                                   Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1"
+                                Orientation="Vertical">
+                            <TextBlock Text="Медуза"
+            Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/5.png" 
+                               Style="{StaticResource PfotoContainer}"
+                               Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="центральный прокол, 
+                                       расположенный над верхней 
+                                       губой в ямке под носом."
+                                    Style="{StaticResource Topic}"
+                                    Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="2"
+                                 Orientation="Vertical">
+                            <TextBlock Text="Эшли"
+            Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/6.png"
+                               Style="{StaticResource PfotoContainer}"
+                               Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="губа прокалывается четко по центру."
+                                   Style="{StaticResource Topic}"
+                                   Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="0"
+                                Orientation="Vertical">
+                            <TextBlock Text="Георгин"
+                                     Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/7.png" 
+                               Style="{StaticResource PfotoContainer}"
+                                Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="двусторонний симметричный пирсинг в уголках губ."
+                                   Style="{StaticResource Topic}"
+                                   Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="1"
+         Orientation="Vertical">
+                            <TextBlock Text="Укус паука"
+              Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/8.png"
+        Style="{StaticResource PfotoContainer}"
+         Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="два прокола делаются рядом в области уголка нижней губы"
+            Style="{StaticResource Topic}"
+            Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="2"
+         Orientation="Vertical">
+                            <TextBlock Text="Укус змеи"
+              Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/LipsPirs/9.png"
+        Style="{StaticResource PfotoContainer}"
+         Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="два симметричных нижней прокола нижней губы."
+            Style="{StaticResource Topic}"
+            Margin="15"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

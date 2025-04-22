@@ -1,0 +1,348 @@
+﻿<Page x:Class="Amalgama.View.Pages.RecordPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Amalgama.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RecordPage"
+      Background="Transparent">
+    <Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="0.25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.25"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#AFAEAE" Offset="0.0"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.25"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.5"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.75"/>
+                        <GradientStop Color="#F2F2F2" Offset="1.0"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid Grid.Column="0">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Column="2" >
+                <Image Source="/Images/BannerRegisterPage.png"
+                              Stretch="Fill"
+                              Width="860"
+                           Height="900"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                      />
+                <StackPanel
+                    Height="900"
+                    Width="650"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                    <Image Source="/Images/recBannerBack.png"
+           Stretch="Fill"
+           Opacity="0.95"/>
+                </StackPanel>
+                <TextBlock x:Name="MessageTextBlock"
+             Style="{StaticResource Content}"
+ VerticalAlignment="Bottom" 
+ HorizontalAlignment="Center" Margin="0,0,0,10" 
+ FontSize="16"
+         Visibility="Collapsed"/>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="95"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="95"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"/>
+                <Image Source="/Images/AMALGAMA.png" 
+                       Height="25"
+                       />
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <Button Style="{StaticResource LightButton1}"
+                            Content="МНЕ ЕСТЬ 18  ЛЕТ"></Button>
+                        <Button Style="{StaticResource ButtonSt1}"
+                                Width="35"
+                                Height="32.02"
+                                Content="+"
+                                x:Name="AgeAdd"
+                                Click="AgeAdd_Click"></Button>
+
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <Button
+                        Style="{StaticResource ButtonSt1}"
+                            Content="СЕАНС"
+                            x:Name="Seance"
+                            Click="Seance_Click"/>
+                        <Button
+ Style="{StaticResource LightButton2}"
+     Content="КОНСУЛЬТАЦИЮ"
+                            x:Name="RecCons"
+                            Click="RecCons_Click"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <StackPanel Height="150"
+                                Width="400">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="Записаться на:"
+                                   Style="{StaticResource OtherTitle}"
+                                  Margin="10.75 0 0 0"/>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <StackPanel Orientation="Horizontal"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center">
+                                    <Button
+                       Style="{StaticResource ButtonSt1}"
+                           Content="Тату"
+                           x:Name="Tatoo"
+                           Click="Tatoo_Click"/>
+                                    <Button
+Style="{StaticResource LightButton2}"
+    Content="Пирсинг"
+                           x:Name="Pirc"
+                           Click="Pirc_Click"/>
+                                    <Button
+Style="{StaticResource LightButton2}"
+    Content="Сведение тату"
+                           x:Name="Remove"
+                           Click="Remove_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+
+                </Grid>
+                <Grid Grid.Row="4">
+                    <StackPanel Orientation="Vertical"
+                                 Height="150" 
+                                Width="385">
+                        <TextBox Style="{StaticResource TextBoxStyle}"
+                                 x:Name="Txt"
+                                  Text="Фамилия имя"
+                                 MouseDown="Txt_MouseDown"
+                              />
+                        <StackPanel Height="8.5"/>
+                        <TextBox Style="{StaticResource TextBoxStyle}"
+         x:Name="Txt1"
+                                 Text="Номер телефона"
+         MouseDown="Txt1_MouseDown"
+      />
+
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="5">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20.5"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <StackPanel Height="150"
+                                            Width="400">
+                                    <TextBlock Text="Цвет:"
+                                               Margin="10.75 0 0 0"
+                                               Style="{StaticResource OtherTitle}"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <StackPanel 
+                                    Orientation="Horizontal"
+                                   VerticalAlignment="Center"
+HorizontalAlignment="Center">
+                                    <Button x:Name="ColorTatoo"
+                                        Click="ColorTatoo_Click"
+                                        Style="{StaticResource ButtonSt1}"
+                                        Content="Цветная"/>
+                                    <Button x:Name="Mono"
+                                        Click="Mono_Click"
+                                        Style="{StaticResource LightButton2}"
+                                        Content="Ч/Б"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Height="7.5"></StackPanel>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <StackPanel Orientation="Vertical"
+                           Height="150" 
+                          Width="385">
+                        <TextBox Style="{StaticResource TextBoxStyle}"
+                           x:Name="Txt2"
+                            Text="Опишите желаемый результат"
+                           MouseDown="Txt2_MouseDown"
+                        />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="7">
+                    <StackPanel Orientation="Vertical"
+            Height="150" 
+           Width="385">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <StackPanel
+                Width="400"
+                                            Margin="0 5 0 0"
+                                           >
+                                    <TextBlock Text="Выбрать свободную дату:"
+                                             
+                                             Style="{StaticResource OtherTitle}"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <TextBox Style="{StaticResource TextBoxStyle}"
+                                            x:Name="TxtDate"
+                                            Text="Выберите дату"
+                                            Margin="13 0 0 0"
+                                            MouseDown="TxtDate_MouseDown"/>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="8">
+                    <StackPanel Orientation="Vertical"
+                                Height="150"
+                                Width="400"
+                                HorizontalAlignment="Center">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <!-- Заголовок -->
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="Выбрать мастера:"
+                                           Style="{StaticResource OtherTitle}"
+                                           Margin="10.75 8.5 0 0"/>
+                            </Grid>
+                            <!-- Контейнер для мастеров -->
+                            <Grid Grid.Row="1">
+                                <StackPanel x:Name="MastersPanel"
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="20 0 0 0">
+                                    <!-- Мастер 1 (Тату) -->
+                                    <StackPanel x:Name="TattooMasters" Visibility="Collapsed">
+                                        <Border MouseDown="MastersSelect3_MouseDown"
+                                                Style="{StaticResource MastersPfoto}">
+                                            <Image Source="/Images/MMaria.png"
+                                                   Stretch="UniformToFill"
+                                                   HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Image x:Name="TattooMastersText"
+                                               Source="/Images/Maria.png"
+                                               HorizontalAlignment="Center"
+                                               Height="10"
+                                               Margin="0 5.75 0 0"
+                                               Stretch="Uniform"
+                                               Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <!-- Мастер (Пирсинг) -->
+                                    <StackPanel x:Name="PiercingMasters" Visibility="Collapsed">
+                                        <Border MouseDown="MastersSelect1_MouseDown"
+                                                Style="{StaticResource MastersPfoto}">
+                                            <Image Source="/Images/MAngelina.png"
+                                                   Stretch="UniformToFill"
+                                                   HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Image x:Name="PiercingMastersText"
+                                               Source="/Images/Angelina.png"
+                                               HorizontalAlignment="Center"
+                                               Height="10"
+                                               Margin="0 5.75 0 0"
+                                               Stretch="Uniform"
+                                               Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <!-- Мастер (Сведение тату) -->
+                                    <StackPanel x:Name="RemoveTattooMasters" Visibility="Collapsed">
+                                        <Border MouseDown="MastersSelect2_MouseDown"
+                                                Style="{StaticResource MastersPfoto}">
+                                            <Image Source="/Images/MArisha.png"
+                                                   Stretch="UniformToFill"
+                                                   HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Image x:Name="RemoveTattooMastersText"
+                                               Source="/Images/Arisha.png"
+                                               HorizontalAlignment="Center"
+                                               Height="10"
+                                               Margin="0 5.75 0 0"
+                                               Stretch="Uniform"
+                                               Visibility="Collapsed"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="9">
+                        <Button x:Name="RecSucces"
+                            Click="RecSucces_Click"
+                            Style="{StaticResource ButtonSt1}"
+                            Content="ЗАПИСАТЬСЯ"></Button>
+                    </Grid>
+                </Grid>
+            <Grid Grid.Column="4">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Image Source="/Images/Closed.png"
+                               Name="Imageclosed"
+                               Stretch="Fill"
+                               Height="15"
+                               Width="15"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               MouseDown="Imageclosed_MouseDown"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Page> 
+  
