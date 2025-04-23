@@ -33,16 +33,16 @@ namespace Amalgama.View.AdminPages
         private DBConnection.ApplicationDbContext _db = new DBConnection.ApplicationDbContext();
 
         public AdminSigIn()
-            {
-                InitializeComponent();
-               
-            }
+        {
+            InitializeComponent();
 
-            private void AdminSigIn_Loaded(object sender, RoutedEventArgs e)
-            {
-                // Отображаем матовый фон при загрузке
-                Overlay.Visibility = Visibility.Visible;
-            }
+        }
+
+        private void AdminSigIn_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Отображаем матовый фон при загрузке
+            Overlay.Visibility = Visibility.Visible;
+        }
         private void Password_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (_isUpdatingText)
@@ -84,65 +84,106 @@ namespace Amalgama.View.AdminPages
         }
 
         private void CloseDialog_Click(object sender, RoutedEventArgs e)
-            {
-                this.Close();
-            }
+        {
+            this.Close();
+        }
 
         private void SignUp_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Проверка на пустые поля
             if (string.IsNullOrWhiteSpace(Login.Text) || string.IsNullOrWhiteSpace(_realPassword))
             {
-                MessageBox.Show("Логин и пароль не могут быть пустыми.",
-                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Логин и пароль не могут быть пустыми.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             string username = Login.Text.Trim();
-            string password = _realPassword; // Используем введённый пользователем пароль
+            string password = _realPassword;
 
             try
             {
-                if (_db == null || _db.Users == null)
+                if (_db == null)
                 {
-                    MessageBox.Show("Ошибка инициализации базы данных.",
-                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Ошибка инициализации базы данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
-                var user = _db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
-
-                if (user != null)
+                // Проверка для суперадмина (логин: admin, пароль: root)
+                if (username == "admin" && password == "root")
                 {
-                    // Устанавливаем пользователя в сессию
-                    SessionManager.SetUser(user);
-
-                    if (!user.IsAdmin)
+                    var superAdmin = new SuperAdmin
                     {
-                        MessageBox.Show("Доступ разрешён только администраторам.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
+                        Login = "admin",
+                        Password = "root",
+                        IsSuperAdmin = true
+                    };
 
-                    // Навигация для админа
+                    SessionManager.SetUser(superAdmin);
+
+                    // Навигация для суперадмина
                     CoreNavigate.NavigatorCore.Navigate(new DataRecForAdmin());
 
                     Window currentWindow = Window.GetWindow(this);
                     currentWindow?.Close();
+                    return;
                 }
-                else
+
+                // Проверка для тестового администратора (логин: Admin, пароль: Admin)
+                if (username == "Test" && password == "Test")
                 {
-                    MessageBox.Show("Ошибка ввода данных: неверный логин или пароль.",
-                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Login.Text = string.Empty;
-                    Password.Text = string.Empty;
-                    _realPassword = string.Empty;
+                    var testAdmin = new Administrator
+                    {
+                        Login = "Test",
+                        Password = "Test",
+                        IsAdmin = true
+                    };
+
+                    SessionManager.SetUser(testAdmin);
+
+                    // Навигация для тестового администратора
+                    CoreNavigate.NavigatorCore.Navigate(new DataRecForAdmin());
+
+                    Window currentWindow = Window.GetWindow(this);
+                    currentWindow?.Close();
+                    return;
                 }
+
+                // Проверка для администратора в базе данных
+                var admin = _db.Administrators.FirstOrDefault(a => a.Login == username && a.Password == password);
+                if (admin != null)
+                {
+                    SessionManager.SetUser(admin);
+
+                    // Навигация для администратора
+                    CoreNavigate.NavigatorCore.Navigate(new DataRecForAdmin());
+
+                    Window currentWindow = Window.GetWindow(this);
+                    currentWindow?.Close();
+                    return;
+                }
+
+                // Проверка для обычного пользователя
+                var user = _db.Users.FirstOrDefault(u => u.Login == username && u.Password == password);
+                if (user != null)
+                {
+                    SessionManager.SetUser(user);
+
+                    // Обычные пользователи не имеют доступа к админской панели
+                    MessageBox.Show("Доступ разрешён только администраторам.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Если ни один из вариантов не подходит
+                MessageBox.Show("Ошибка ввода данных: неверный логин или пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Login.Text = string.Empty;
+                Password.Text = string.Empty;
+                _realPassword = string.Empty;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Произошла ошибка: {ex.Message}");
 
-                MessageBox.Show($"Произошла ошибка при работе с базой данных: {ex.Message}",
-                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Произошла ошибка при работе с базой данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

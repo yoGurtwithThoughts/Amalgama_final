@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Amalgama.Servis;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,7 +27,7 @@ namespace Amalgama.View.Pages
     /// </summary>
     public partial class MasterPirs : Page
     {
-        private bool _isAdmin = true;
+        private bool _isAdmin = true; // Уровень доступа
         private DispatcherTimer _textTimer;
         private int _currentIndex;
         private int _currentParagraphIndex;
@@ -36,94 +37,105 @@ namespace Amalgama.View.Pages
         private (string Text, bool IsBold)[][] _paragraphs;
         private (string Text, bool IsBold)[][] _paragraphstitle;
         private (string Text, bool IsBold)[][] _paragraphstitle2;
+        private Button AddImageButton; // Кнопка "Добавить фото"
+        private string[] imagePaths =
+        {
+            "/Images/MastersPersonalDate/PirsWorks/1.png",
+            "/Images/MastersPersonalDate/PirsWorks/2.png",
+            "/Images/MastersPersonalDate/PirsWorks/3.png",
+            "/Images/MastersPersonalDate/PirsWorks/4.png",
+            "/Images/MastersPersonalDate/PirsWorks/5.png",
+            "/Images/MastersPersonalDate/PirsWorks/6.png",
+            "/Images/MastersPersonalDate/PirsWorks/7.png",
+            "/Images/MastersPersonalDate/PirsWorks/8.png",
+            "/Images/MastersPersonalDate/PirsWorks/9.png",
+            "/Images/MastersPersonalDate/PirsWorks/10.png",
+            "/Images/MastersPersonalDate/PirsWorks/11.png",
+            "/Images/MastersPersonalDate/PirsWorks/12.png",
+            "/Images/MastersPersonalDate/PirsWorks/13.png",
+            "/Images/MastersPersonalDate/PirsWorks/14.png",
+            "/Images/MastersPersonalDate/PirsWorks/15.png",
+            "/Images/MastersPersonalDate/PirsWorks/16.png",
+            "/Images/MastersPersonalDate/PirsWorks/17.png",
+            "/Images/MastersPersonalDate/PirsWorks/18.png",
+            "/Images/MastersPersonalDate/PirsWorks/19.png",
+            "/Images/MastersPersonalDate/PirsWorks/20.png",
+            "/Images/MastersPersonalDate/PirsWorks/21.png",
+            "/Images/MastersPersonalDate/PirsWorks/22.png",
+            "/Images/MastersPersonalDate/PirsWorks/23.png",
+            "/Images/MastersPersonalDate/PirsWorks/24.png",
+            "/Images/MastersPersonalDate/PirsWorks/25.png",
+            "/Images/MastersPersonalDate/PirsWorks/26.png"
+        };
 
-        string[] imagePaths =
-           {
-                "/Images/MastersPersonalDate/PirsWorks/1.png",
-                "/Images/MastersPersonalDate/PirsWorks/2.png",
-                 "/Images/MastersPersonalDate/PirsWorks/3.png",
-                 "/Images/MastersPersonalDate/PirsWorks/4.png",
-                 "/Images/MastersPersonalDate/PirsWorks/5.png",
-                 "/Images/MastersPersonalDate/PirsWorks/6.png",
-                 "/Images/MastersPersonalDate/PirsWorks/7.png",
-                 "/Images/MastersPersonalDate/PirsWorks/8.png",
-                 "/Images/MastersPersonalDate/PirsWorks/9.png", 
-                 "/Images/MastersPersonalDate/PirsWorks/10.png",
-                 "/Images/MastersPersonalDate/PirsWorks/11.png",
-                 "/Images/MastersPersonalDate/PirsWorks/12.png",
-                 "/Images/MastersPersonalDate/PirsWorks/13.png",
-                 "/Images/MastersPersonalDate/PirsWorks/14.png",
-                 "/Images/MastersPersonalDate/PirsWorks/15.png",
-                 "/Images/MastersPersonalDate/PirsWorks/16.png",
-                 "/Images/MastersPersonalDate/PirsWorks/17.png",
-                 "/Images/MastersPersonalDate/PirsWorks/18.png",
-                 "/Images/MastersPersonalDate/PirsWorks/19.png",
-                 "/Images/MastersPersonalDate/PirsWorks/20.png",
-                 "/Images/MastersPersonalDate/PirsWorks/21.png",
-                 "/Images/MastersPersonalDate/PirsWorks/22.png",
-                 "/Images/MastersPersonalDate/PirsWorks/23.png",
-                 "/Images/MastersPersonalDate/PirsWorks/24.png",
-                 "/Images/MastersPersonalDate/PirsWorks/25.png",
-                 "/Images/MastersPersonalDate/PirsWorks/26.png",
-
-    };
         public MasterPirs()
         {
             InitializeComponent();
-
             InitializeTextBlocksAndParagraphs();
             StartTypingAnimation(0);
             AnimateButtonGrid();
             AnimateImage();
-            AddImageButton.Visibility = _isAdmin ? Visibility.Visible : Visibility.Collapsed;
+            CreateAddImageButton(); // Создаем кнопку "Добавить фото"
             LoadGallery();
+        }
+
+        private void CreateAddImageButton()
+        {
+            AddImageButton = new Button
+            {
+                Content = "+",
+                Background = new SolidColorBrush(Color.FromRgb(0xC1, 0xC1, 0xC1)), // #C1C1C1
+                BorderBrush = new SolidColorBrush(Colors.White),
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 25,
+                Height = 185,
+                Width = 185,
+                Margin = new Thickness(10),
+                Visibility = Visibility.Collapsed, // По умолчанию скрыта
+                Tag = "AddImageButton" // Для идентификации
+            };
+            AddImageButton.Click += AddImageButton_Click;
         }
 
         private void InitializeTextBlocksAndParagraphs()
         {
-            // Связываем TextBlock'и с их параграфами
             _textBlocks = new TextBlock[] { TxtWrite };
             _textBlocksTitle = new TextBlock[] { TxtWriteTitle };
+            _textBlocksTitle2 = new TextBlock[] { TxtWriteTitle2 };
 
-            // Инициализируем заголовок
             _paragraphstitle = new (string Text, bool IsBold)[][]
             {
-        new (string, bool)[]
-        {
-            ("\n\t\tПирсинг", false)
-        }
+                new (string, bool)[]
+                {
+                    ("\t\tПирсинг", false)
+                }
             };
 
-            // Инициализируем заголовок "Плюсы"
             _paragraphstitle2 = new (string Text, bool IsBold)[][]
             {
-        new (string, bool)[]
-        {
-            ("\n\t\tПлюсы", false)
-        }
+                new (string, bool)[]
+                {
+                    ("\t\tПлюсы", false)
+                }
             };
 
-            // Инициализируем основной текст
             _paragraphs = new (string Text, bool IsBold)[][]
             {
-        new (string, bool)[]
-        {
-            ("\nМастер пирсинга с опытом более 2 лет, " +
-             "специализирующийся на выполнении различных видов пирсинга, " +
-             "включая пирсинг ушей, носа, бровей, языка и других частей тела. " +
-             "Обладаю хорошим уровнем квалификации и вниманием к деталям, " +
-             "что позволяет мне оказывать безопасные и " +
-             "качественные услуги клиентам.", false)
-        }
+                new (string, bool)[]
+                {
+                    ("Мастер пирсинга с опытом более 2 лет, " +
+                     "специализирующийся на выполнении различных видов пирсинга, " +
+                     "включая пирсинг ушей, носа, бровей, языка и других частей тела. " +
+                     "Обладаю хорошим уровнем квалификации и вниманием к деталям, " +
+                     "что позволяет мне оказывать безопасные и качественные услуги клиентам.", false)
+                }
             };
 
-            // Применяем текст к элементам интерфейса
             ApplyTextToTextBlocks();
         }
 
         private void ApplyTextToTextBlocks()
         {
-            // Применяем заголовок
             foreach (var paragraph in _paragraphstitle)
             {
                 foreach (var (text, isBold) in paragraph)
@@ -135,7 +147,6 @@ namespace Amalgama.View.Pages
                 }
             }
 
-            // Применяем заголовок "Плюсы" в TxtPluses
             foreach (var paragraph in _paragraphstitle2)
             {
                 foreach (var (text, isBold) in paragraph)
@@ -147,7 +158,6 @@ namespace Amalgama.View.Pages
                 }
             }
 
-            // Применяем основной текст
             foreach (var paragraph in _paragraphs)
             {
                 foreach (var (text, isBold) in paragraph)
@@ -159,9 +169,9 @@ namespace Amalgama.View.Pages
                 }
             }
         }
+
         private void AnimateImage()
         {
-            // Создаем анимацию для изменения прозрачности (Opacity)
             var fadeAnimation = new DoubleAnimation
             {
                 From = 0,
@@ -170,7 +180,6 @@ namespace Amalgama.View.Pages
                 EasingFunction = new PowerEase { Power = 3 }
             };
 
-            // Создаем анимацию для смещения по оси X
             var translateAnimation = new DoubleAnimation
             {
                 From = -150,
@@ -179,20 +188,16 @@ namespace Amalgama.View.Pages
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            // Убеждаемся, что RenderTransform является TranslateTransform
             if (!(AnimatedBack.RenderTransform is TranslateTransform))
             {
                 AnimatedBack.RenderTransform = new TranslateTransform();
             }
 
-            // Применяем анимации к элементу AnimatedBack
             Storyboard.SetTarget(fadeAnimation, AnimatedBack);
             Storyboard.SetTargetProperty(fadeAnimation, new PropertyPath(UIElement.OpacityProperty));
-
             Storyboard.SetTarget(translateAnimation, AnimatedBack);
             Storyboard.SetTargetProperty(translateAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
 
-            // Если нужно также анимировать ImgAnimated, создаем отдельные анимации
             if (ImgAnimated != null)
             {
                 if (!(ImgAnimated.RenderTransform is TranslateTransform))
@@ -218,22 +223,18 @@ namespace Amalgama.View.Pages
 
                 Storyboard.SetTarget(fadeAnimationForImg, ImgAnimated);
                 Storyboard.SetTargetProperty(fadeAnimationForImg, new PropertyPath(UIElement.OpacityProperty));
-
                 Storyboard.SetTarget(translateAnimationForImg, ImgAnimated);
                 Storyboard.SetTargetProperty(translateAnimationForImg, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
 
-                // Добавляем анимации для ImgAnimated в Storyboard
                 var storyboard = new Storyboard();
                 storyboard.Children.Add(fadeAnimation);
                 storyboard.Children.Add(translateAnimation);
                 storyboard.Children.Add(fadeAnimationForImg);
                 storyboard.Children.Add(translateAnimationForImg);
-
                 storyboard.Begin();
             }
             else
             {
-                // Если ImgAnimated отсутствует, запускаем анимацию только для AnimatedBack
                 var storyboard = new Storyboard();
                 storyboard.Children.Add(fadeAnimation);
                 storyboard.Children.Add(translateAnimation);
@@ -253,6 +254,7 @@ namespace Amalgama.View.Pages
             {
                 Interval = TimeSpan.FromMilliseconds(1)
             };
+
             _textTimer.Tick += (sender, e) => TextTimer_Tick(sender, e, index);
             _textTimer.Start();
         }
@@ -262,7 +264,6 @@ namespace Amalgama.View.Pages
             if (_currentParagraphIndex < _paragraphs[index].Length)
             {
                 var (text, isBold) = _paragraphs[index][_currentParagraphIndex];
-
                 if (_currentIndex < text.Length)
                 {
                     char currentChar = text[_currentIndex];
@@ -277,15 +278,16 @@ namespace Amalgama.View.Pages
                 {
                     _currentIndex = 0;
                     _currentParagraphIndex++;
-                    _textBlocks[index].Inlines.Add(new LineBreak()); // Перенос строки
+                    _textBlocks[index].Inlines.Add(new LineBreak());
                 }
             }
             else
             {
                 _textTimer.Stop();
-                StartTypingAnimation(index + 1); // Переход к следующему TextBlock
+                StartTypingAnimation(index + 1);
             }
         }
+
         private void AnimateButtonGrid()
         {
             var translateAnimation = new DoubleAnimation
@@ -296,7 +298,6 @@ namespace Amalgama.View.Pages
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
 
-
             var opacityAnimation = new DoubleAnimation
             {
                 From = 0,
@@ -305,15 +306,16 @@ namespace Amalgama.View.Pages
                 EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
             };
 
-
             var transform = (TranslateTransform)AnimatedBRD.RenderTransform;
             transform.BeginAnimation(TranslateTransform.YProperty, translateAnimation);
             AnimatedBRD.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
         }
+
         private void Closer_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
         }
+
         private void ArrowBut_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CoreNavigate.NavigatorCore.Navigate(new MastersPage());
@@ -323,53 +325,66 @@ namespace Amalgama.View.Pages
         {
             CoreNavigate.NavigatorCore.Navigate(new RecordPage());
         }
+
         private void LoadGallery()
         {
             int columns = 4;
-            int rows = (int)Math.Ceiling((double)imagePaths.Length / columns);
-
             GalleryGrid.Columns = columns;
-            GalleryGrid.Rows = rows;
-            GalleryGrid.Children.Clear(); // Очищаем детей перед загрузкой новой галереи
+            GalleryGrid.Children.Clear(); // Очищаем галерею перед загрузкой
+
+            if (imagePaths == null || imagePaths.Length == 0)
+            {
+                MessageBox.Show("Нет доступных изображений.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
             foreach (var path in imagePaths)
             {
-                var image = new Image
-                {
-                    Source = new BitmapImage(new Uri(path, UriKind.Relative)),
-                    Stretch = Stretch.UniformToFill,
-                    Width = 250,
-                    Height = 250,
-                    Margin = new Thickness(2),
-                    Style = (Style)FindResource("PfotoContainer"),
-                    Tag = path
-                };
-
-                image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(path);
-
-                // Добавляем изображение только если его еще нет в галерее
-                if (!GalleryGrid.Children.OfType<Image>().Any(img => img.Tag?.ToString() == path))
-                {
-                    GalleryGrid.Children.Add(image);
-                }
+                var image = CreateGalleryImage(path);
+                GalleryGrid.Children.Add(image);
             }
 
-            // Если пользователь — админ, показываем кнопку "Добавить фото"
-            AddImageButton.Visibility = _isAdmin ? Visibility.Visible : Visibility.Collapsed;
+            UpdateAddImageButtonVisibility();
         }
-        private void OpenPhotoViewWindow(string imagePath)
+        private Image CreateGalleryImage(string path)
         {
-            // Получаем индекс текущего изображения
-            int currentIndex = Array.IndexOf(imagePaths, imagePath);
+            var image = new Image
+            {
+                Source = new BitmapImage(new Uri(path, UriKind.Relative)),
+                Stretch = Stretch.UniformToFill,
+                Width = 250,
+                Height = 250,
+                Margin = new Thickness(2),
+                Style = (Style)FindResource("PfotoContainer"),
+                Tag = path
+            };
 
-            // Открываем окно просмотра изображений
-            PhotoViewWindow photoViewWindow = new PhotoViewWindow(imagePaths, currentIndex);
-            photoViewWindow.ShowDialog(); // Используйте ShowDialog, чтобы открыть окно модально
+            image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(path);
+
+            if (IsUserAdminOrSuperAdmin())
+            {
+                var contextMenu = new ContextMenu();
+                var deleteMenuItem = new MenuItem { Header = "Удалить изображение" };
+                deleteMenuItem.Click += (sender, e) => DeleteImage(path);
+                contextMenu.Items.Add(deleteMenuItem);
+                image.ContextMenu = contextMenu;
+            }
+
+            return image;
+        }
+        private bool IsUserAdminOrSuperAdmin()
+        {
+            return SessionManager.IsAdministrator || SessionManager.IsSuperAdmin;
         }
 
-        private void AddImage_Click(object sender, RoutedEventArgs e)
+        private bool IsUserSuperAdmin()
         {
-            if (!_isAdmin)
+            return SessionManager.IsSuperAdmin;
+        }
+
+        private void AddImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsUserSuperAdmin())
             {
                 MessageBox.Show("У вас нет прав на добавление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -385,38 +400,156 @@ namespace Amalgama.View.Pages
             {
                 string selectedPath = openFileDialog.FileName;
 
-                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string targetDirectory = System.IO.Path.Combine(appDirectory, "Images/MastersPersonalDate/PirsWorks");
+                // Создаем временную ссылку на изображение
+                var bitmapImage = new BitmapImage(new Uri(selectedPath, UriKind.Absolute));
 
-                // Создаем целевую директорию, если она не существует
-                if (!Directory.Exists(targetDirectory))
+                // Создаем новое изображение для галереи
+                var image = new Image
                 {
-                    Directory.CreateDirectory(targetDirectory);
+                    Source = bitmapImage,
+                    Stretch = Stretch.UniformToFill,
+                    Width = 250,
+                    Height = 250,
+                    Margin = new Thickness(2),
+                    Style = (Style)FindResource("PfotoContainer"),
+                    Tag = selectedPath // Сохраняем полный путь для контекстного меню
+                };
+
+                image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(selectedPath);
+
+                if (IsUserAdminOrSuperAdmin())
+                {
+                    var contextMenu = new ContextMenu();
+                    var deleteMenuItem = new MenuItem { Header = "Удалить изображение" };
+                    deleteMenuItem.Click += (sender, e) => DeleteImageFromGallery(image); // Удаляем только из галереи
+                    contextMenu.Items.Add(deleteMenuItem);
+                    image.ContextMenu = contextMenu;
                 }
 
-                string targetPath = System.IO.Path.Combine(targetDirectory, System.IO.Path.GetFileName(selectedPath));
-                string relativePath = $"Images/MastersPersonalDate/PirsWorks/{System.IO.Path.GetFileName(selectedPath)}";
-
-                try
+                // Удаляем кнопку из галереи
+                if (GalleryGrid.Children.Contains(AddImageButton))
                 {
-                    File.Copy(selectedPath, targetPath, true);
-
-                    // Обновляем массив путей
-                    imagePaths = imagePaths.Append(relativePath).ToArray();
-
-                    // Обновляем галерею
-                    LoadGallery(); // Здесь мы перезагружаем галерею
+                    GalleryGrid.Children.Remove(AddImageButton);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка при сохранении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+
+                // Добавляем новое изображение
+                GalleryGrid.Children.Add(image);
+
+                // Обновляем видимость кнопки добавления
+                UpdateAddImageButtonVisibility();
             }
             else
             {
                 MessageBox.Show("Файл не выбран.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+        private void DeleteImageFromGallery(Image image)
+        {
+            if (!IsUserAdminOrSuperAdmin())
+            {
+                MessageBox.Show("У вас нет прав на удаление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
+            if (GalleryGrid.Children.Contains(image))
+            {
+                GalleryGrid.Children.Remove(image);
+                MessageBox.Show("Изображение успешно удалено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            // Обновляем видимость кнопки добавления
+            UpdateAddImageButtonVisibility();
+        }
+        private void UpdateAddImageButtonVisibility()
+        {
+            if (IsUserSuperAdmin())
+            {
+                AddImageButton.Visibility = Visibility.Visible;
+
+                int totalImages = GalleryGrid.Children.Count; // Количество элементов в галерее
+                int columns = 4;
+
+                // Вычисляем строку и столбец для кнопки
+                int lastRow = (int)Math.Ceiling((double)(totalImages + 1) / columns); // +1 для учета кнопки
+                int lastColumn = totalImages % columns; // Остаток от деления определяет столбец
+
+                if (lastColumn == 0)
+                {
+                    lastRow--;
+                    lastColumn = columns - 1;
+                }
+                else
+                {
+                    lastColumn--; // Индексация столбцов начинается с 0
+                }
+
+                // Удаляем кнопку, если она уже существует
+                if (GalleryGrid.Children.Contains(AddImageButton))
+                {
+                    GalleryGrid.Children.Remove(AddImageButton);
+                }
+
+                // Добавляем кнопку в рассчитанную позицию
+                Grid.SetRow(AddImageButton, lastRow);
+                Grid.SetColumn(AddImageButton, lastColumn);
+                GalleryGrid.Children.Add(AddImageButton);
+            }
+            else
+            {
+                AddImageButton.Visibility = Visibility.Collapsed;
+
+                // Удаляем кнопку, если она существует
+                if (GalleryGrid.Children.Contains(AddImageButton))
+                {
+                    GalleryGrid.Children.Remove(AddImageButton);
+                }
+            }
+        }
+
+
+        private void OpenPhotoViewWindow(string imagePath)
+        {
+            int currentIndex = Array.IndexOf(imagePaths, imagePath);
+
+            if (currentIndex == -1)
+            {
+                MessageBox.Show("Изображение не найдено в массиве.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            PhotoViewWindow photoViewWindow = new PhotoViewWindow(imagePaths, currentIndex);
+            photoViewWindow.ShowDialog();
+        }
+
+        private void DeleteImage(string imagePath)
+        {
+            if (!IsUserAdminOrSuperAdmin())
+            {
+                MessageBox.Show("У вас нет прав на удаление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string fullPath = System.IO.Path.Combine(appDirectory, imagePath.TrimStart('/').Replace('/', '\\'));
+
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                    imagePaths = imagePaths.Where(p => p != imagePath).ToArray();
+                    LoadGallery();
+                    MessageBox.Show("Изображение успешно удалено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Файл не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

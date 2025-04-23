@@ -147,8 +147,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IKVM" Version="8.11.2" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+    <PackageReference Include="Nuke.Common" Version="9.0.4" />
     <PackageReference Include="SharpVectors" Version="1.8.4.2" />
     <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.119" />

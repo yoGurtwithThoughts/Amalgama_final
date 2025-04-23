@@ -10,34 +10,41 @@
       Title="Gallery">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
+            <!-- Определение столбцов -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="35"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="35"/>
             </Grid.ColumnDefinitions>
+
+            <!-- Определение строк -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
+            <!-- Левая панель с кнопкой "Назад" -->
             <Canvas>
                 <StackPanel Orientation="Horizontal"
-                            Panel.ZIndex="2"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            Canvas.Left="18"
-                            Canvas.Top="0"> 
+                        Panel.ZIndex="2"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Canvas.Left="18"
+                        Canvas.Top="0">
                     <Border x:Name="ArrowBut"
-                            MouseDown="ArrowBut_MouseDown"
-                            Style="{StaticResource ArrowBackbutton}"
-                            HorizontalAlignment="Left"
-                            Margin="15 15 0 0">
-                        <Image Source="/Images/ArrowBackButton.png" 
-                       Stretch="Uniform"/>
+                        MouseDown="ArrowBut_MouseDown"
+                        Style="{StaticResource ArrowBackbutton}"
+                        HorizontalAlignment="Left"
+                        Margin="15 15 0 0">
+                        <Image Source="/Images/ArrowBackButton.png"
+                           Stretch="Uniform"/>
                     </Border>
                 </StackPanel>
             </Canvas>
+
+            <!-- Левая и правая границы с эффектом размытия -->
             <Border Grid.Column="0" Grid.RowSpan="10">
                 <Border.Effect>
                     <BlurEffect Radius="-2"/>
@@ -51,6 +58,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
+
             <Border Grid.Column="3" Grid.RowSpan="10">
                 <Border.Effect>
                     <BlurEffect Radius="-2"/>
@@ -64,6 +72,8 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
+
+            <!-- Кнопка закрытия -->
             <Grid Grid.Column="3">
                 <Image x:Name="CloseButton"
                    MouseDown="CloseButton_MouseDown"
@@ -73,43 +83,35 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"/>
             </Grid>
+
+            <!-- Панель с кнопками "Тату" и "Пирсинг" -->
             <Grid Grid.Row="1"
-                  Grid.Column="1"
-                  Grid.ColumnSpan="2">
+              Grid.Column="1"
+              Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
                     <Button Style="{StaticResource ButtonSt1}"
-                            Content="Тату"
-                            x:Name="Tatoo"
-                            Click="Tatoo_Click"/>
+                        Content="Тату"
+                        x:Name="Tatoo"
+                        Click="Tatoo_Click"/>
                     <Button Style="{StaticResource LightButton2}"
-                            Content="Пирсинг"
-                            x:Name="Pirc"
-                            Click="Pirc_Click"/>
+                        Content="Пирсинг"
+                        x:Name="Pirc"
+                        Click="Pirc_Click"/>
                 </StackPanel>
             </Grid>
-            <StackPanel VerticalAlignment="Top"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="2">
-                <UniformGrid x:Name="GalleryGrid" 
-                             Columns="4" 
-                             Margin="10">
-                </UniformGrid>
-                <Button x:Name="AddImageButton"
-                        Content="+" 
-                        Click="AddImageButton_Click"
-                        Background="#C1C1C1"
-                        BorderBrush="#FFFFFF"
-                        Foreground="#FFFFFF"
-                        FontSize="25"
-                        Height="185"
-                        Width="185"
-                        Margin="10"
-                        HorizontalAlignment="Right"
-                        Visibility="Collapsed"/>
-            </StackPanel>
+
+            <!-- Галерея изображений -->
+            <UniformGrid x:Name="GalleryGrid"
+                     Columns="4"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     Margin="10">
+                <!-- Кнопка "Добавить фото" будет добавлена динамически в коде -->
+            </UniformGrid>
+
         </Grid>
     </ScrollViewer>
 </Page>

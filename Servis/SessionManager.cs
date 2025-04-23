@@ -9,15 +9,29 @@ namespace Amalgama.Servis
 {
     public static class SessionManager
     {
-        public static User? CurrentUser { get; private set; }
+        // Текущий пользователь (может быть User, Administrator или SuperAdmin)
+        public static object? CurrentUser { get; private set; }
 
-        public static bool IsAdmin => CurrentUser?.IsAdmin == true;
+        // Проверка, является ли текущий пользователь администратором
+        public static bool IsAdministrator => CurrentUser is Administrator;
 
-        public static void SetUser(User user)
+        // Проверка, является ли текущий пользователь суперадмином
+        public static bool IsSuperAdmin => CurrentUser is SuperAdmin;
+
+        // Установка текущего пользователя
+        public static void SetUser(object user)
         {
-            CurrentUser = user;
+            if (user is User || user is Administrator || user is SuperAdmin)
+            {
+                CurrentUser = user;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid user type. Only User, Administrator, or SuperAdmin are allowed.");
+            }
         }
 
+        // Выход из системы
         public static void Logout()
         {
             CurrentUser = null;

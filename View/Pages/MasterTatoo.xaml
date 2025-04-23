@@ -242,25 +242,14 @@
                 </Border>
             </Grid>
             <Border Grid.Row="4"
-           Grid.ColumnSpan="2"
-           VerticalAlignment="Bottom"
-           Grid.Column="1">
+                  Grid.ColumnSpan="2"
+                  VerticalAlignment="Bottom"
+                  Grid.Column="1">
                 <StackPanel VerticalAlignment="Bottom">
                     <UniformGrid x:Name="GalleryGrid" 
-            Columns="4">
+           Columns="4">
                         <!-- Здесь будут добавляться изображения -->
                     </UniformGrid>
-                    <Button x:Name="AddImageButton" 
-                   Content="+" 
-                   Click="AddImage_Click" 
-                   Background="#C1C1C1" 
-                   BorderBrush="#FFFFFF" 
-                   Foreground="#FFFFFF" 
-                   FontSize="25" 
-                   Height="185" 
-                   Width="185" 
-                   Margin="10" 
-                   HorizontalAlignment="Right"/>
                 </StackPanel>
             </Border>
         </Grid>

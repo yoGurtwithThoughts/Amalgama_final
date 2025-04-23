@@ -1,4 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using Amalgama.Servis;
+using com.sun.tools.javac.file;
+using Microsoft.Win32;
+using Nuke.Common.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +29,7 @@ namespace Amalgama.View.Pages
     public partial class Gallery : Page
     {
         private string currentCategory = "Tatoo";
+        private Button AddImageButton;
         private bool _isAdmin = true; // Уровень доступа
         private string[] imagePaths =
         {
@@ -78,50 +82,123 @@ namespace Amalgama.View.Pages
     };
 
         private int currentImageIndex = 0;
+
         public Gallery()
         {
             InitializeComponent();
-            currentCategory = "Tatoo";
-            LoadGallery(imagePaths.Where(p => p.Contains("TatooWorks")).ToArray());
+            CreateAddImageButton(); // Создаем кнопку "Добавить фото"
+            LoadGallery(); // Загружаем галерею для текущей категории
         }
 
-        private void LoadGallery(string[] filteredPaths) // Обновлено для приема массива строк
+        private void CreateAddImageButton()
         {
-            GalleryGrid.Children.Clear(); // Очищаем галерею
-
-            foreach (var path in filteredPaths)
+            AddImageButton = new Button
             {
-                var image = new Image
-                {
-                    Source = new BitmapImage(new Uri(path, UriKind.Relative)),
-                    Stretch = Stretch.UniformToFill,
-                    Width = 250,
-                    Height = 250,
-                    Margin = new Thickness(1),
-                    Style = (Style)FindResource("PfotoContainer"),
-                    Tag = path
-                };
+                Content = "+",
+                Background = new SolidColorBrush(Color.FromRgb(0xC1, 0xC1, 0xC1)), // #C1C1C1
+                BorderBrush = new SolidColorBrush(Colors.White),
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 25,
+                Height = 185,
+                Width = 185,
+                Margin = new Thickness(10),
+                Visibility = Visibility.Collapsed, // По умолчанию скрыта
+                Tag = "AddImageButton" // Для идентификации
+            };
 
-                image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(path);
+            // Привязываем событие клика
+            AddImageButton.Click += AddImageButton_Click;
+        }
+
+        private void LoadGallery()
+        {
+            int columns = 4;
+            GalleryGrid.Columns = columns;
+            GalleryGrid.Children.Clear(); // Очищаем галерею перед загрузкой
+
+            if (imagePaths == null || imagePaths.Length == 0)
+            {
+                MessageBox.Show("Нет доступных изображений.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            foreach (var path in imagePaths)
+            {
+                var image = CreateGalleryImage(path);
                 GalleryGrid.Children.Add(image);
             }
 
-            // Показываем кнопку "Добавить фото" только для админа
-            AddImageButton.Visibility = _isAdmin ? Visibility.Visible : Visibility.Collapsed;
+            UpdateAddImageButtonVisibility();
         }
-        private void OpenPhotoViewWindow(string imagePath)
+        private Image CreateGalleryImage(string path)
         {
-            // Получаем индекс текущего изображения
-            int currentIndex = Array.IndexOf(imagePaths, imagePath);
+            var image = new Image
+            {
+                Source = new BitmapImage(new Uri(path, UriKind.Relative)),
+                Stretch = Stretch.UniformToFill,
+                Width = 250,
+                Height = 250,
+                Margin = new Thickness(2),
+                Style = (Style)FindResource("PfotoContainer"),
+                Tag = path
+            };
 
-            // Открываем окно просмотра изображений
-            PhotoViewWindow photoViewWindow = new PhotoViewWindow(imagePaths, currentIndex);
-            photoViewWindow.ShowDialog(); // Используйте ShowDialog, чтобы открыть окно модально
+            image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(path);
+
+            if (IsUserAdminOrSuperAdmin())
+            {
+                var contextMenu = new ContextMenu();
+                var deleteMenuItem = new MenuItem { Header = "Удалить изображение" };
+                deleteMenuItem.Click += (sender, e) => DeleteImage(path);
+                contextMenu.Items.Add(deleteMenuItem);
+                image.ContextMenu = contextMenu;
+            }
+
+            return image;
+        }
+        private void DeleteImage(string imagePath)
+        {
+            if (!IsUserAdminOrSuperAdmin())
+            {
+                MessageBox.Show("У вас нет прав на удаление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string fullPath = System.IO.Path.Combine(appDirectory, imagePath.TrimStart('/').Replace('/', '\\'));
+
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                    imagePaths = imagePaths.Where(p => p != imagePath).ToArray();
+                    LoadGallery();
+                    MessageBox.Show("Изображение успешно удалено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Файл не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private bool IsUserAdminOrSuperAdmin()
+        {
+            return SessionManager.IsAdministrator || SessionManager.IsSuperAdmin;
+        }
+
+        private bool IsUserSuperAdmin()
+        {
+            return SessionManager.IsSuperAdmin;
         }
 
         private void AddImageButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!_isAdmin)
+            if (!IsUserSuperAdmin())
             {
                 MessageBox.Show("У вас нет прав на добавление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -137,42 +214,119 @@ namespace Amalgama.View.Pages
             {
                 string selectedPath = openFileDialog.FileName;
 
-                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string categoryPath = currentCategory == "Tatoo" ? "TatooWorks" : "PirsWorks";
-                string targetDirectory = Path.Combine(appDirectory, $"Images/MastersPersonalDate/{categoryPath}");
+                // Создаем временную ссылку на изображение
+                var bitmapImage = new BitmapImage(new Uri(selectedPath, UriKind.Absolute));
 
-                // Создаем целевую директорию, если она не существует
-                if (!Directory.Exists(targetDirectory))
+                // Создаем новое изображение для галереи
+                var image = new Image
                 {
-                    Directory.CreateDirectory(targetDirectory);
+                    Source = bitmapImage,
+                    Stretch = Stretch.UniformToFill,
+                    Width = 250,
+                    Height = 250,
+                    Margin = new Thickness(2),
+                    Style = (Style)FindResource("PfotoContainer"),
+                    Tag = selectedPath // Сохраняем полный путь для контекстного меню
+                };
+
+                image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(selectedPath);
+
+                if (IsUserAdminOrSuperAdmin())
+                {
+                    var contextMenu = new ContextMenu();
+                    var deleteMenuItem = new MenuItem { Header = "Удалить изображение" };
+                    deleteMenuItem.Click += (sender, e) => DeleteImageFromGallery(image); // Удаляем только из галереи
+                    contextMenu.Items.Add(deleteMenuItem);
+                    image.ContextMenu = contextMenu;
                 }
 
-                string targetPath = Path.Combine(targetDirectory, Path.GetFileName(selectedPath));
-                string relativePath = $"/Images/MastersPersonalDate/{categoryPath}/{Path.GetFileName(selectedPath)}";
-
-                try
+                // Удаляем кнопку из галереи
+                if (GalleryGrid.Children.Contains(AddImageButton))
                 {
-                    File.Copy(selectedPath, targetPath, true);
-
-                    // Добавляем в массив изображений
-                    imagePaths = imagePaths.Append(relativePath).ToArray();
-
-                    // Фильтруем изображения по текущей категории
-                    var filteredImages = imagePaths.Where(p => p.Contains($"/{categoryPath}/")).ToArray();
-
-                    // Обновляем галерею с новыми изображениями
-                    LoadGallery(filteredImages); // Передаем отфильтрованные изображения
+                    GalleryGrid.Children.Remove(AddImageButton);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка при сохранении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+
+                // Добавляем новое изображение
+                GalleryGrid.Children.Add(image);
+
+                // Обновляем видимость кнопки добавления
+                UpdateAddImageButtonVisibility();
             }
             else
             {
                 MessageBox.Show("Файл не выбран.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+        private void DeleteImageFromGallery(Image image)
+        {
+            if (!IsUserAdminOrSuperAdmin())
+            {
+                MessageBox.Show("У вас нет прав на удаление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (GalleryGrid.Children.Contains(image))
+            {
+                GalleryGrid.Children.Remove(image);
+                MessageBox.Show("Изображение успешно удалено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            // Обновляем видимость кнопки добавления
+            UpdateAddImageButtonVisibility();
+        }
+        private void UpdateAddImageButtonVisibility()
+        {
+            if (IsUserSuperAdmin())
+            {
+                AddImageButton.Visibility = Visibility.Visible;
+
+                int totalImages = GalleryGrid.Children.Count; // Количество элементов в галерее
+                int columns = 4;
+
+                // Вычисляем строку и столбец для кнопки
+                int lastRow = (int)Math.Ceiling((double)(totalImages + 1) / columns); // +1 для учета кнопки
+                int lastColumn = totalImages % columns; // Остаток от деления определяет столбец
+
+                if (lastColumn == 0)
+                {
+                    lastRow--;
+                    lastColumn = columns - 1;
+                }
+                else
+                {
+                    lastColumn--; // Индексация столбцов начинается с 0
+                }
+
+                // Удаляем кнопку, если она уже существует
+                if (GalleryGrid.Children.Contains(AddImageButton))
+                {
+                    GalleryGrid.Children.Remove(AddImageButton);
+                }
+
+                // Добавляем кнопку в рассчитанную позицию
+                Grid.SetRow(AddImageButton, lastRow);
+                Grid.SetColumn(AddImageButton, lastColumn);
+                GalleryGrid.Children.Add(AddImageButton);
+            }
+            else
+            {
+                AddImageButton.Visibility = Visibility.Collapsed;
+
+                // Удаляем кнопку, если она существует
+                if (GalleryGrid.Children.Contains(AddImageButton))
+                {
+                    GalleryGrid.Children.Remove(AddImageButton);
+                }
+            }
+        }
+
+        private void OpenPhotoViewWindow(string imagePath)
+        {
+            int currentIndex = Array.IndexOf(imagePaths, imagePath);
+            PhotoViewWindow photoViewWindow = new PhotoViewWindow(imagePaths, currentIndex);
+            photoViewWindow.ShowDialog();
+        }
+
         private void ArrowBut_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CoreNavigate.NavigatorCore.Navigate(new StartPage());
@@ -185,28 +339,26 @@ namespace Amalgama.View.Pages
 
         private void Tatoo_Click(object sender, RoutedEventArgs e)
         {
-            // Фильтруем только тату
-            var filteredImages = imagePaths.Where(p => p.Contains("TatooWorks")).ToArray();
-            LoadGallery(filteredImages);
+            currentCategory = "Tatoo";
+            LoadGallery();
 
-            // Меняем стили кнопок
-            Tatoo.Background = new SolidColorBrush(Color.FromRgb(135, 0, 0));
-            Pirc.Background = new SolidColorBrush(Colors.Transparent);
-            Tatoo.Foreground = new SolidColorBrush(Colors.White);
-            Pirc.Foreground = new SolidColorBrush(Colors.Black);
-
+            UpdateButtonStyles(Tatoo, Pirc, Color.FromRgb(135, 0, 0));
         }
 
         private void Pirc_Click(object sender, RoutedEventArgs e)
         {
-            var filteredImages = imagePaths.Where(p => p.Contains("PirsWorks")).ToArray();
-            LoadGallery(filteredImages);
+            currentCategory = "Pirs";
+            LoadGallery();
 
-            // Меняем стили кнопок
-            Pirc.Background = new SolidColorBrush(Color.FromRgb(95, 0, 0));
-            Tatoo.Background = new SolidColorBrush(Colors.Transparent);
-            Pirc.Foreground = new SolidColorBrush(Colors.White);
-            Tatoo.Foreground = new SolidColorBrush(Colors.Black);
+            UpdateButtonStyles(Pirc, Tatoo, Color.FromRgb(95, 0, 0));
+        }
+
+        private void UpdateButtonStyles(Button activeButton, Button inactiveButton, Color activeColor)
+        {
+            activeButton.Background = new SolidColorBrush(activeColor);
+            inactiveButton.Background = new SolidColorBrush(Colors.Transparent);
+            activeButton.Foreground = new SolidColorBrush(Colors.White);
+            inactiveButton.Foreground = new SolidColorBrush(Colors.Black);
         }
     }
 }
